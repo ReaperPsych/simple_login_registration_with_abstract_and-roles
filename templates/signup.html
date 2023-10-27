@@ -1,0 +1,50 @@
+<!-- FILEPATH: /home/reaperx/Documents/self_pro/learn_python/usertype/templates/signup.html -->
+
+<form action= "/signup/" method="POST">
+    {% csrf_token %}
+    <h1>Signup</h1>
+
+    <div>
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div><br>
+    <div>
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div><br>
+
+    <div>
+        <label for="first_name">First Name:</label>
+        <input type="text" id="first_name" name="first_name" required>
+    </div><br>
+    <div>
+        <label for="last_name">Last name:</label>
+        <input type="email" id="last_name" name="last_name" required>
+    </div><br>
+
+    <div>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+    </div><br>
+    <div>
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" required>
+    </div><br>
+    <div>
+        <label for="phone_number">Phone Number:</label>
+        <input type="tel" id="phone_number" name="phone_number" required>
+    </div><br>
+    <div>
+        <label for="user_role">User Role:</label>
+        <input type="radio" id="Teacher" name="user_role" value="teacher" required>
+        <label for="buyer">Teacher</label>
+        <input type="radio" id="student" name="user_role" value="student" required>
+        <label for="seller">Student</label>
+    </div><br>
+    <button type="submit">Sign Up</button>
+</form>
+
+
+<form action="{% url 'login' %}">
+    <button type="submit">Login</button>
+</form>

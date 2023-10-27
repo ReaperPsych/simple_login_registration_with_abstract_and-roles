@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+
+
+    {% if user.is_authenticated %}
+    <h3> Welcome {{ first_name }} </h3>
+    <button type="submit"><a href="{% url 'logout' %}"> logout </a></button>
+    {% else %}
+    <button type="submit"><a href="{% url 'signup' %}"> signup </a></button>
+    <button type="submit"><a href="{% url 'login' %}"> login </a></button>
+    {% endif %}
+    
+
+
+    
+    
+</body>
+</html>
