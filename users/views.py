@@ -54,7 +54,6 @@ def login_view(request):
 
         if user is not None:
             login(request, user)
-            first_name = user.first_name
             return redirect('/')
         
         else:
