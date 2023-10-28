@@ -15,6 +15,7 @@ def process_image(image, username):
     img = img.resize((300, 300))
     img = img.convert('RGB')
     new_filename = f"{username}.jpg"
+    # save_path = os.path.join(settings.MEDIA_ROOT, 'profile_pictures', new_filename)
     img.save(new_filename, "JPEG")
     img.close()
     return new_filename
@@ -52,14 +53,14 @@ def signup_view(request):
 
         myuser.first_name = first_name
         myuser.last_name = last_name
-        myuser.profile = image
+        # myuser.profile = image
         myuser.phone_number = phone_number
         myuser.user_type = user_type
         
-        # if image:
-        #     processed_image = process_image(image, username)
-        #     return processed_image
-        # myuser.profile = processed_image
+        if image:
+            processed_image = process_image(image, username)
+            # return processed_image
+            myuser.profile = processed_image
         myuser.save()
 
         messages.success(request, 'Your account has been created successfully')
