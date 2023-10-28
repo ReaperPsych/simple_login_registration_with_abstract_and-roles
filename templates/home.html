@@ -9,12 +9,19 @@
 
 
     {% if user.is_authenticated %}
+
     <h3> Welcome {{ first_name }} </h3>
+    {% if img %}
+        <img src="{{ img.url }}" alt="Profile Picture">
+    {% endif %}
     <button type="submit"><a href="{% url 'logout' %}"> logout </a></button>
+
     {% else %}
+
     <h3> Lets begin our journey! </h3>
     <button type="submit"><a href="{% url 'signup' %}"> signup </a></button>
     <button type="submit"><a href="{% url 'login' %}"> login </a></button>
+    
     {% endif %}
     
 
