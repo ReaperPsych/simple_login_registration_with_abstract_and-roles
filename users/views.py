@@ -1,3 +1,4 @@
+from io import BytesIO
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 from .models import CustomUser
@@ -9,16 +10,17 @@ from PIL import ImageFilter
 # Create your views here.
 
 
-
-def process_image(image, username):
+def process_image(image):
     img = Image.open(image)
     img = img.resize((300, 300))
     img = img.convert('RGB')
-    new_filename = f"{username}.jpg"
-    # save_path = os.path.join(settings.MEDIA_ROOT, 'profile_pictures', new_filename)
-    img.save(new_filename, "JPEG")
-    img.close()
-    return new_filename
+
+    image_data = BytesIO()
+    img.save(image_data, format='JPEG')
+    image_data.seek(0)
+    return image_data
+
+
 
 
 
@@ -50,17 +52,19 @@ def signup_view(request):
             return redirect('signup')
 
         myuser = CustomUser.objects.create_user(username=username, email=email, password=password)
-
         myuser.first_name = first_name
         myuser.last_name = last_name
-        # myuser.profile = image
         myuser.phone_number = phone_number
         myuser.user_type = user_type
-        
+
+        # imgaes cannot be directly passed in the myuser 
+
         if image:
-            processed_image = process_image(image, username)
-            # return processed_image
-            myuser.profile = processed_image
+            processed_image = process_image(image)
+            image_name = f"{username}.jpg"
+            processed_image.seek(0)
+            myuser.profile.save(image_name, ContentFile(processed_image.read()))
+        
         myuser.save()
 
         messages.success(request, 'Your account has been created successfully')

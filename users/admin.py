@@ -12,4 +12,6 @@ class CustomUserAdmin(UserAdmin):
         ('Personal Information', {'fields':('first_name', 'last_name', 'phone_num', 'profile')}),
         ('User Type', {'fields':('user_type',)}),
     )
-    list_display = ['username', 'email', 'first_name', 'last_name', 'user_type', 'profile']
+    list_display = ['username', 'email', 'first_name', 'last_name', 'user_type', 'profile', 'image_tag']
+
+
